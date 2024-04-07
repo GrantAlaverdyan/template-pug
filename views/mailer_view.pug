@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to mail
+    form(action='/sendData' method='POST')
+
+        input(placeholder='Login' name='login')
+        input(placeholder='Password' name='password')
+        input(placeholder='Mail-Address' name='mail')
+        input(type='submit')
+
