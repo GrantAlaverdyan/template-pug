@@ -1,0 +1,26 @@
+const express = require('express');
+const cron = require('node-cron');
+
+const app = express();
+
+// Функция для вывода "привет" в консоль
+function sayHello() {
+    console.log('Привет!');
+}
+
+// Массив с датами
+const dates = ['29.04.2024', '01.05.2024', '07.05.2024'];
+
+// Установка cron задачи для каждой даты в массиве
+dates.forEach(date => {
+    // Разбиваем дату на составляющие
+    const [day, month, year] = date.split('.');
+    // Устанавливаем cron задачу на 12 часов дня для каждой даты
+    cron.schedule(`0 12 ${day} ${month} *`, sayHello);
+});
+
+// Запуск сервера
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Сервер запущен на порту ${PORT}`);
+});
